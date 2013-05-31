@@ -26,3 +26,8 @@
 
     # Edit DOMAINNAME
   3 /DOMAINNAME/i
+
+/etc/postfix/transport
+
+    # Edit DOMAINNAME and EXCHANGE_IP
+  1 DOMAINNAME      smtp:[EXCHANGE_IP]
