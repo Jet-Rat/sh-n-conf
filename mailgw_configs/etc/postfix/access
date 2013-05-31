@@ -1,0 +1,5 @@
+good_user@good_domain.yay		OK
+bad_user@bad_domain.doh			REJECT User is not available
+DOMAINNAME				REJECT Your HELO could be better (You are me? R U sure?). Considered as SPAM!
+WAN_IP					REJECT You have my IP? Great! Considered as SPAM!
+localhost				REJECT I dont write letters to myself. Considered as SPAM!
