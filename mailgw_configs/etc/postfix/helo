@@ -1,0 +1,3 @@
+/([0-9]{1,3}(\.|-)){3}[0-9]{1,3}/i	REJECT Your HELO could be better (IP HELOs arent good choice). Considered as SPAM!
+/localhost/i				REJECT Your HELO could be better (Localhost HELO is bad idea). Considered as SPAM!
+/DOMAINNAME/i				REJECT Your HELO could be better (You are me? R U sure?). Considered as SPAM!
