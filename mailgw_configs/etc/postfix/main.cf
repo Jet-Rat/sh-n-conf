@@ -34,8 +34,8 @@ alias_database = hash:/etc/aliases
 myorigin = /etc/mailname
 # Edit GWHOSTNAME and DOMAINNAME
 mydestination = GWHOSTNAME.DOMAINNAME, localhost.DOMAINNAME, localhost
-# Edit EXCHANGE_IP
-mynetworks = 127.0.0.0/8 EXCHANGE_IP [::ffff:127.0.0.0]/104 [::1]/128
+# Edit EXCHANGE_HOST_IP
+mynetworks = 127.0.0.0/8 EXCHANGE_HOST_IP [::ffff:127.0.0.0]/104 [::1]/128
 mailbox_command = procmail -a "$EXTENSION"
 mailbox_size_limit = 0
 recipient_delimiter = +

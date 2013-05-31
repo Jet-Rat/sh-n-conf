@@ -15,8 +15,8 @@
  35 # Edit GWHOSTNAME and DOMAINNAME
  36 mydestination = GWHOSTNAME.DOMAINNAME, localhost.DOMAINNAME, localhost
 
- 37 # Edit EXCHANGE_IP
- 38 mynetworks = 127.0.0.0/8 EXCHANGE_IP [::ffff:127.0.0.0]/104 [::1]/128
+ 37 # Edit EXCHANGE_HOST_IP
+ 38 mynetworks = 127.0.0.0/8 EXCHANGE_HOST_IP [::ffff:127.0.0.0]/104 [::1]/128
 
  48 # Edit GWHOSTNAME and DOMAINNAME
  49 virtual_mailbox_domains = DOMAINNAME
@@ -30,8 +30,8 @@
 
 /etc/postfix/transport
 
-    # Edit DOMAINNAME and EXCHANGE_IP
-  1 DOMAINNAME      smtp:[EXCHANGE_IP]
+    # Edit DOMAINNAME and EXCHANGE_HOST_IP
+  1 DOMAINNAME      smtp:[EXCHANGE_HOST_IP]
 
 
 /etc/postfix/access
