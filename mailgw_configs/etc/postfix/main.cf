@@ -1,0 +1,118 @@
+# See /usr/share/postfix/main.cf.dist for a commented, more complete version
+
+
+# Debian specific:  Specifying a file name will cause the first
+# line of that file to be used as the name.  The Debian default
+# is /etc/mailname.
+#myorigin = /etc/mailname
+
+smtpd_banner = $myhostname ESMTP $mail_name (Debian/GNU)
+biff = no
+
+# appending .domain is the MUA's job.
+append_dot_mydomain = no
+
+# Uncomment the next line to generate "delayed mail" warnings
+#delay_warning_time = 4h
+
+readme_directory = no
+
+# TLS parameters
+smtpd_tls_cert_file=/etc/ssl/certs/ssl-cert-snakeoil.pem
+smtpd_tls_key_file=/etc/ssl/private/ssl-cert-snakeoil.key
+smtpd_use_tls=yes
+smtpd_tls_session_cache_database = btree:${data_directory}/smtpd_scache
+smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
+
+# See /usr/share/doc/postfix/TLS_README.gz in the postfix-doc package for
+# information on enabling SSL in the smtp client.
+
+# Edit GWHOSTNAME and DOMAINNAME
+myhostname = GWHOSTNAME.DOMAINNAME
+alias_maps = hash:/etc/aliases
+alias_database = hash:/etc/aliases
+myorigin = /etc/mailname
+# Edit GWHOSTNAME and DOMAINNAME
+mydestination = GWHOSTNAME.DOMAINNAME, localhost.DOMAINNAME, localhost
+# Edit EXCHANGE_IP
+mynetworks = 127.0.0.0/8 EXCHANGE_IP [::ffff:127.0.0.0]/104 [::1]/128
+mailbox_command = procmail -a "$EXTENSION"
+mailbox_size_limit = 0
+recipient_delimiter = +
+inet_interfaces = all
+
+##########################################
+##########################################
+##########################################
+
+# Edit GWHOSTNAME and DOMAINNAME
+virtual_mailbox_domains = DOMAINNAME
+
+transport_maps = hash:/etc/postfix/transport
+virtual_transport = hash:/etc/postfix/transport
+
+bounce_queue_lifetime = 1d
+maximal_queue_lifetime = 1d
+minimal_backoff_time = 180s
+maximal_backoff_time = 12h
+message_size_limit = 30720000
+
+strict_rfc821_envelopes = yes
+disable_vrfy_command = yes
+smtpd_delay_reject = yes
+smtpd_helo_required = yes
+anvil_rate_time_unit = 60s
+smtp_always_send_ehlo = yes
+smtpd_hard_error_limit = 1
+smtpd_recipient_limit = 1
+smtpd_sasl_security_options = noanonymous
+
+anvil_rate_time_unit = 60s
+smtpd_client_connection_count_limit = 5
+smtpd_client_connection_rate_limit = 6
+smtpd_client_message_rate_limit = 6
+smtpd_client_recipient_rate_limit = 15
+
+smtpd_client_restrictions =
+    reject_unauth_pipelining,
+    permit_sasl_authenticated,
+    permit_mynetworks,
+    check_helo_access regexp:/etc/postfix/helo,
+    check_sender_access hash:/etc/postfix/access
+    reject_unknown_client_hostname,
+    check_client_access regexp:/etc/postfix/dul_checks,
+    permit
+
+smtpd_helo_restrictions =
+    permit_mynetworks,
+    permit_sasl_authenticated,
+    check_sender_access hash:/etc/postfix/access
+    reject_unknown_client,
+    reject_rbl_client cbl.abuseat.org,
+    reject_rbl_client sbl-xbl.spamhaus.org,
+    reject_rbl_client sbl.spamhaus.org,
+    reject_rbl_client dnsbl.njabl.org,
+    check_helo_access regexp:/etc/postfix/helo,
+    reject_invalid_helo_hostname,
+    reject_non_fqdn_helo_hostname,
+    reject_unknown_helo_hostname,
+#    check_sender_access hash:/etc/postfix/access,
+    check_recipient_access hash:/etc/postfix/recipients,
+    reject
+
+smtpd_sender_restrictions =
+    permit_sasl_authenticated,
+    permit_mynetworks,
+    reject_non_fqdn_sender,
+    reject_unknown_sender_domain,
+    permit
+
+smtpd_recipient_restrictions =
+    reject_unauth_pipelining,
+    permit_mynetworks,
+    permit_sasl_authenticated,
+    reject_unauth_destination,
+    reject_invalid_hostname,
+    reject_non_fqdn_recipient,
+    reject_unknown_recipient_domain,
+    permit

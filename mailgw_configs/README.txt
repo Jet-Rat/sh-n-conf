@@ -1,12 +1,28 @@
 /usr/local/sbin/scripts/convert_recipients_raw.sh :
 
-# Edit EXCHANGE_HOST_IP and SHARE_NAME
-SMBSOURCE='//EXCHANGE_HOST_IP/SHARE_NAME'
+ 21 # Edit EXCHANGE_HOST_IP and SHARE_NAME
+ 22 SMBSOURCE='//EXCHANGE_HOST_IP/SHARE_NAME'
 
-# Edit DOMAINNAME
-GREPPATTERN='DOMAINNAME'
+ 29 # Edit DOMAINNAME
+ 30 GREPPATTERN='DOMAINNAME'
+
+
+/etc/postfix/main.cf
+
+ 30 # Edit GWHOSTNAME and DOMAINNAME
+ 31 myhostname = GWHOSTNAME.DOMAINNAME
+
+ 35 # Edit GWHOSTNAME and DOMAINNAME
+ 36 mydestination = GWHOSTNAME.DOMAINNAME, localhost.DOMAINNAME, localhost
+
+ 37 # Edit EXCHANGE_IP
+ 38 mynetworks = 127.0.0.0/8 EXCHANGE_IP [::ffff:127.0.0.0]/104 [::1]/128
+
+ 48 # Edit GWHOSTNAME and DOMAINNAME
+ 49 virtual_mailbox_domains = DOMAINNAME
 
 
 /etc/postfix/helo
-# Edit DOMAINNAME
-/DOMAINNAME/i
+
+    # Edit DOMAINNAME
+  3 /DOMAINNAME/i
