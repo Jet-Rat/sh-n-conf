@@ -12,7 +12,11 @@
 #. $env:ExchangeInstallPath\bin\RemoteExchange.ps1
 #Connect-ExchangeServer -auto
 #
-#Get-Mailbox | ft PrimarySMTPAddress > C:\scripts\mailscript_output\recipients_raw
+#Get-Mailbox | ft PrimarySMTPAddress > C:\scripts\mailusers_out\mailscript_output\recipients_raw
+#Get-DistributionGroup | ft PrimarySMTPAddress >> C:\scripts\mailusers_out\mailscript_output\recipients_raw
+
+#	And you can start it by making this cmd-script (\mailusers_out.bat) and adding it to schedule on Exchange-server
+#powershell -command C:\scripts\mailusers_out\mailusers_out.ps1
 
 ##########################################
 ##	VARS:
