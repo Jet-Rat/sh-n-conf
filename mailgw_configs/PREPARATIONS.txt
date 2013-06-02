@@ -1,3 +1,18 @@
+To make all this work you have to the following:
+
+-- Copy files from "root", "etc" and "usr" to your real directories. (Don't forget to backup things, that you have).
+
+-- Edit configs (see below)
+
+-- Copy files and dir from "exchange_side" to C:\scripts\mailusers_out
+
+-- Make C:\scripts\mailusers_out\mailscript_output a shared folder, avialable for user from smb_mailscript_output.txt (see convert_recipients_raw.sh)
+
+-- Add C:\scripts\mailusers_out\mailusers_out.bat to schedule at Exchange server (and run it once).
+
+-- Add /usr/local/sbin/scripts/convert_recipients_raw.sh to crontab (and run it once).
+
+
 /etc/postfix/main.cf
 
  30 # Edit GWHOSTNAME and DOMAINNAME

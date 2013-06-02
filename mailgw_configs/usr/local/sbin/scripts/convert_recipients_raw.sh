@@ -53,7 +53,11 @@ fi;
 
 if [[ "$(mount | grep "${MNTPOINT}")" != "" && -e $FROMFILE ]]; then
 	echo "$(for i in $(iconv -f utf-16 -t utf-8 $FROMFILE | sed 's|.$||' | grep $GREPPATTERN | sort); do echo -e "${i}\tOK"; done)" > $TOFILE && echo "$(date +%F_%T) : Convertation SUCCESSFUL" >> $LOGFILE
-	postmap $TOFILE && echo "$(date +%F_%T) : postmap SUCCESSFUL" >> $LOGFILE
+	cd /etc/postfix		#	Dont realy know, is this needed, or not
+	postmap $TOFILE && echo "$(date +%F_%T) : postmap recipients SUCCESSFUL" >> $LOGFILE
+	postmap /etc/postfix/transport && echo "$(date +%F_%T) : postmap transport SUCCESSFUL" >> $LOGFILE
+	postmap /etc/postfix/helo && echo "$(date +%F_%T) : postmap helo SUCCESSFUL" >> $LOGFILE
+	postmap /etc/postfix/access && echo "$(date +%F_%T) : postmap access SUCCESSFUL" >> $LOGFILE
 	/etc/init.d/postfix restart && echo "$(date +%F_%T) : Postfix restarted SUCCESSFUL" >> $LOGFILE
 	exit 0;
 fi;
