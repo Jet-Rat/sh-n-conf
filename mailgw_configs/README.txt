@@ -1,12 +1,3 @@
-/usr/local/sbin/scripts/convert_recipients_raw.sh :
-
- 21 # Edit EXCHANGE_HOST_IP and SHARE_NAME
- 22 SMBSOURCE='//EXCHANGE_HOST_IP/SHARE_NAME'
-
- 29 # Edit DOMAINNAME
- 30 GREPPATTERN='DOMAINNAME'
-
-
 /etc/postfix/main.cf
 
  30 # Edit GWHOSTNAME and DOMAINNAME
@@ -22,16 +13,16 @@
  49 virtual_mailbox_domains = DOMAINNAME
 
 
-/etc/postfix/helo
-
-    # Edit DOMAINNAME
-  3 /DOMAINNAME/i
-
-
 /etc/postfix/transport
 
     # Edit DOMAINNAME and EXCHANGE_HOST_IP
   1 DOMAINNAME      smtp:[EXCHANGE_HOST_IP]
+
+
+/etc/postfix/helo
+
+    # Edit DOMAINNAME
+  3 /DOMAINNAME/i
 
 
 /etc/postfix/access
@@ -46,3 +37,12 @@
   4 WAN_IP                                  REJECT You have my IP? Great! Considered as SPAM!
     # Letter that has "localhost" in some of it attributes is likely spam
   5 localhost                               REJECT I dont write letters to myself. Considered as SPAM!
+
+
+/usr/local/sbin/scripts/convert_recipients_raw.sh :
+
+ 21 # Edit EXCHANGE_HOST_IP and SHARE_NAME
+ 22 SMBSOURCE='//EXCHANGE_HOST_IP/SHARE_NAME'
+
+ 29 # Edit DOMAINNAME
+ 30 GREPPATTERN='DOMAINNAME'
