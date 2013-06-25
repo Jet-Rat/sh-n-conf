@@ -1,3 +1,7 @@
+##########################################
+##	Exploring disks
+##########################################
+
 done:		with fdisc discovered, that sda, sdb and sdc has GPT
 done:		in /etc/yum.repos.d/CentOS-Base.repo enabled "base" repo
 done:		installed parted
@@ -26,3 +30,23 @@ Number  Start   End    Size   File system  Flags
  1      0.00kB  724GB  724GB  ext3
 end_console:
 
+
+##########################################
+##	Creating Local_ISO StorageRepo
+##########################################
+
+console:
+[root@vServerXen ~]# cd /var/run/sr-mount/3f13bf71-2b90-5502-2d0d-f89c41b5d663
+[root@vServerXen ~]# mkdir iso
+[root@vServerXen ~]# cd iso
+[root@vServerXen iso]# xe sr-create name-label="Local_ISO" type=iso device-config:location=/var/run/sr-mount/3f13bf71-2b90-5502-2d0d-f89c41b5d663/iso device-config:legacy_mode=true content-type=iso
+a2e95f2e-47f1-def2-c70f-4a1672cf56a0
+
+
+##########################################
+##	Downloading ISOs
+##########################################
+
+while true; do wget -c https://dl.dropboxusercontent.com/u/1126981/debian-6.0.5-amd64-i386-netinst.iso; sleep 15s; done
+wget -c http://cdimage.debian.org/debian-cd/7.1.0/amd64/iso-cd/debian-7.1.0-amd64-netinst.iso
+wget -c http://mirror.yandex.ru/centos/6.4/isos/x86_64/CentOS-6.4-x86_64-netinstall.iso
