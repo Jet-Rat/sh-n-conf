@@ -1,0 +1,28 @@
+done:		with fdisc discovered, that sda, sdb and sdc has GPT
+done:		in /etc/yum.repos.d/CentOS-Base.repo enabled "base" repo
+done:		installed parted
+done:		installed vim-enhanced
+done:		in /etc/yum.repos.d/CentOS-Base.repo disabled "base" repo
+done:		with parted discovered that sdc3 is part of lvm
+info:		discovered that sdc1 has ext3 on it and mounted as root
+console:
+[root@vServerXen ~]# pvscan
+  PV /dev/sda    VG XSLocalEXT-3f13bf71-2b90-5502-2d0d-f89c41b5d663   lvm2 [465.75 GB / 240.88 GB free]
+  PV /dev/sdb    VG XSLocalEXT-3f13bf71-2b90-5502-2d0d-f89c41b5d663   lvm2 [465.75 GB / 240.88 GB free]
+  PV /dev/sdc3   VG XSLocalEXT-3f13bf71-2b90-5502-2d0d-f89c41b5d663   lvm2 [224.88 GB / 0    free]
+  Total: 3 [1.13 TB] / in use: 3 [1.13 TB] / in no VG: 0 [0   ]
+[root@vServerXen ~]# parted /dev/mapper/XSLocalEXT--3f13bf71--2b90--5502--2d0d--f89c41b5d663-3f13bf71--2b90--5502--2d0d--f89c41b5d663
+GNU Parted 1.8.1
+Using /dev/mapper/XSLocalEXT--3f13bf71--2b90--5502--2d0d--f89c41b5d663-3f13bf71--2b90--5502--2d0d--f89c41b5d663
+Welcome to GNU Parted! Type 'help' to view a list of commands.
+(parted) print
+
+Model: Linux device-mapper (dm)
+Disk /dev/mapper/XSLocalEXT--3f13bf71--2b90--5502--2d0d--f89c41b5d663-3f13bf71--2b90--5502--2d0d--f89c41b5d663: 724GB
+Sector size (logical/physical): 512B/512B
+Partition Table: loop
+
+Number  Start   End    Size   File system  Flags
+ 1      0.00kB  724GB  724GB  ext3
+end_console:
+
